@@ -1,0 +1,142 @@
+<app-homepage></app-homepage>
+
+<h1 class="text-center head">CRUD OPERATION</h1>
+
+<div class="d-flex justify-content-end">
+  <button type="button" data-bs-toggle="modal" (click)="event()" data-bs-target="#exampleModal"
+    class="btn btn-success mr-6" style="margin-right: 2%;">Add Here</button>
+</div>
+<div class="conten-align table-responsive-md table-responsive-sm table-responsive-lg">
+  <table class="table mt-3 text-center table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Employee Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Email Id</th>
+        <th scope="col">Mobile No</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employye of getemployeedata">
+        <td>{{employye.id}}</td>
+        <td>{{employye.firstname+" "+employye.lastname}}</td>
+        <td>{{employye.username}}</td>
+        <td>{{employye.email}}</td>
+        <td>{{employye.telnumber}}</td>
+        <td>
+          <button class="btn btn-info" data-bs-toggle="modal" (click)="editDepartment(employye)"
+            data-bs-target="#exampleModal">Edit</button>
+          <button class="btn btn-danger mx-3" (click)=deleteProduct(employye.id)>Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Modal popup show-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registration Form</h5>
+        <button type="button" id="cancel" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="employeeform">
+          <div class="form-group">
+            <img src="assets/avatar.svg" class="round-3" style="width: 100px; margin-left:37%" alt="Avatar" />
+          </div> <br>
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="form-group">
+                <i class="bi bi-person-fill me-2"></i>
+                <label class="mb-1">First Name</label>
+                <input type="text" class="form-control" formControlName="firstname"
+                  [ngClass]="{ 'is-invalid': submitted && h['firstname'].errors }">
+                <div *ngIf="submitted && h['firstname'].errors" class="invalid-feedback">
+                  <div *ngIf="h['firstname'].errors['required']">First Name is reuired</div>
+                  <div *ngIf="h['firstname'].errors['pattern']">Invalid First Name.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-group">
+                <i class="bi bi-person-fill me-2"></i>
+                <label class="mb-1">Last Name</label>
+                <input type="Last Name" class="form-control" formControlName="lastname"
+                  [ngClass]="{ 'is-invalid': submitted && h['lastname'].errors }">
+                <div *ngIf="submitted && h['lastname'].errors" class="invalid-feedback">
+                  <div *ngIf="h['lastname'].errors['required']">Last Name is reuired</div>
+                  <div *ngIf="h['lastname'].errors['pattern']">Invalid Last Name.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <i class="bi bi-person-circle me-2"></i>
+            <label class="mb-1">Username</label>
+            <input type="email" class="form-control" formControlName="username"
+              [ngClass]="{ 'is-invalid': submitted && h['username'].errors }">
+            <div *ngIf="submitted && h['username'].errors" class="invalid-feedback">
+              <div *ngIf="h['username'].errors['required']">User Name is reuired</div>
+              <div *ngIf="h['username'].errors['pattern']">Invalid User Name.</div>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <i class="bi bi-envelope-fill me-2"></i>
+            <label class="mb-1">Email</label>
+            <input type="Last Name" class="form-control" formControlName="email"
+              [ngClass]="{ 'is-invalid': submitted && h['email'].errors }">
+            <div *ngIf="submitted && h['email'].errors" class="invalid-feedback">
+              <div *ngIf="h['email'].errors['required']">Email is reuired</div>
+              <div *ngIf="h['email'].errors['email']">Invalid email</div>
+            </div>
+
+          </div>
+          <div class="form-group mb-2">
+            <i class="bi bi-telephone-fill me-2"></i>
+            <label class="mb-1">Mobile Number</label>
+            <input type="Last Name" class="form-control" formControlName="telnumber"
+              [ngClass]="{ 'is-invalid': submitted && h['telnumber'].errors }">
+            <div *ngIf="submitted && h['telnumber'].errors" class="invalid-feedback">
+              <div *ngIf="h['telnumber'].errors['required']">Mobile Number is reuired</div>
+              <div *ngIf="h['telnumber'].errors['pattern']">Invalid Mobile Number.</div>
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <i class="bi bi-lock-fill me-2"></i>
+            <label class="mb-1">Password</label>
+            <input type="password" class="form-control" formControlName="password"
+              [ngClass]="{ 'is-invalid': submitted && h['password'].errors }">
+            <div *ngIf="submitted && h['password'].errors" class="invalid-feedback">
+              <div *ngIf="h['password'].errors['required']">Password is reuired</div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <i class="bi bi-unlock-fill me-2"></i>
+            <label class="mb-1">Confirm Password</label>
+            <input type="password" class="form-control" formControlName="confirmPassword"
+              [ngClass]="{ 'is-invalid': submitted && h['confirmPassword'].errors }">
+            <div *ngIf="submitted && h['confirmPassword'].errors" class="invalid-feedback">
+              <div *ngIf="h['confirmPassword'].errors['required']">Confirm Password is reuired</div>
+              <div *ngIf="h['confirmPassword'].errors['matching']">
+                Confirm Password does not match
+              </div>
+            </div>
+          </div>
+          <div class=" d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary " (click)="addEmployee()">{{edit === true ? "Update" :
+              "Submit"}}</button>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

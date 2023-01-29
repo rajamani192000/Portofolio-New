@@ -1,0 +1,47 @@
+<app-homepage></app-homepage>
+
+<section class="vh-100" style="background-color: #508bfc">
+  <div class="container  h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem">
+          <div class="card-body p-5">
+            <h1 class="text-center head">Get Currencie From API Task</h1>
+            <P>Eg- INR, USD, EUR, JPY, GBP, CAD, AUD, BBD, BZD</P>
+              <div class="col-md-6 mb-4">
+                <form class="form-inline" [formGroup]="currencie" >
+                  <input class="form-control mr-sm-2" type="search" formControlName="currencies" placeholder="Search" aria-label="Search"> <br>
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="addproject()" >Search</button>
+
+                </form>
+              </div>
+
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Min Size</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of filteredcurrencie">
+                    <td>{{ row.id}}</td>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.min_size }}</td>
+                    <td>
+                    <button class="btn btn-danger" (click)="onClearcurrencie(row)">
+                      Clear
+                    </button>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

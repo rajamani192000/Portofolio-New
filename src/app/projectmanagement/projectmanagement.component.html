@@ -1,0 +1,771 @@
+<app-homepage></app-homepage>
+
+<h1 class="text-center head">Project Management</h1>
+
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+  <!-- Dependent -->
+  <mat-tab label="Dependent">
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="card-body p-5">
+        <h2 class="text-uppercase text-center mb-5">Dependent</h2>
+        <form [formGroup]="dependent">
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <i class="bi bi-person-fill me-2"></i>
+              <label class="form-label">Name</label>
+              <input
+                formControlName="name"
+                type="text"
+                placeholder="Enter the Name"
+                class="form-control form-control-lg"
+                [ngClass]="{
+                  'is-invalid': submitted1 && f['name'].errors
+                }"
+              />
+              <div
+                *ngIf="submitted1 && f['name'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f['name'].errors['required']">
+                  Fullname is required
+                </div>
+
+                <div *ngIf="f['name'].errors['pattern']">Invalid Fullname.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <i class="bi bi-person-fill me-2"></i>
+            <label class="form-label">Gender</label>
+            <div class="form-check" *ngFor="let gen of gender">
+              <input
+                class="form-check-input"
+                id="{{ gen.id }}"
+                type="radio"
+                formControlName="gender"
+                value="{{ gen.value }}"
+                (change)="radioChangeHandler($event)"
+                name="gender"
+                [(ngModel)]="readioSelected"
+                [ngClass]="{ 'is-invalid': submitted1 && f['gender'].errors }"
+              />
+              <div class="displayinline">
+                {{ gen.value }}
+              </div>
+              <br />
+              <div
+                *ngIf="submitted1 && f['gender'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f['gender'].errors['required']">
+                  Gender is reuired
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <i class="bi bi-people-fill me-2"></i>
+              <label class="form-label">Relationship</label>
+              <input
+                type="text"
+                placeholder="Enter the Relationship"
+                class="form-control form-control-lg"
+                formControlName="relationship"
+                [ngClass]="{
+                  'is-invalid': submitted1 && f['relationship'].errors
+                }"
+              />
+              <div
+                *ngIf="submitted1 && f['relationship'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f['relationship'].errors['required']">
+                  Relationship is reuired
+                </div>
+                <div *ngIf="f['relationship'].errors['pattern']">
+                  Invalid Relationship.
+                </div>
+              </div>
+            </div>
+          </div> <br>
+
+
+          <button
+            class="btn btn-primary btn-lg btn-block"
+            type="submit"
+            (click)="adddependent()"
+          >
+            {{ edit === true ? "Update" : "Add" }}
+          </button>
+
+          <button
+            type="button"
+            (click)="onResetdependent()"
+            class="btn btn-danger btn-lg btn-block pull-left"
+          >
+            Reset
+          </button>
+          <br />
+        </form>
+
+        <br />
+
+        <div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Relationship</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rowvalue of tabvalue; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ rowvalue.name }}</td>
+                <td>{{ rowvalue.gender }}</td>
+                <td>{{ rowvalue.relationship }}</td>
+                <td>
+                  <button class="btn btn-danger" (click)="deleteItem(rowvalue)">
+                    Delete
+                  </button>
+                  <button
+                    class="btn btn-info mx-3"
+                    (click)="editItem(rowvalue, i)"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <!-- Project -->
+  <mat-tab label="Project ">
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="card-body p-5">
+        <h2 class="text-uppercase text-center mb-5">Project</h2>
+
+        <form [formGroup]="project">
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <i class="bi bi-list-ol me-2"></i>
+              <label class="form-label">Project No</label>
+              <input
+                formControlName="projectno"
+                type="text"
+                placeholder="Enter the Project No"
+                class="form-control form-control-lg"
+                [ngClass]="{
+                  'is-invalid': submitted2 && h['projectno'].errors
+                }"
+              />
+              <div
+                *ngIf="submitted2 && h['projectno'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="h['projectno'].errors['required']">
+                  Project No is reuired
+                </div>
+                <div *ngIf="h['projectno'].errors['pattern']">
+                  Invalid Project No
+                </div>
+                <div *ngIf="h['projectno'].errors['maxLength']">
+                  Project No must not exceed 6 characters
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <i class="bi bi-person-fill me-2"></i>
+              <label class="form-label">Name</label>
+              <input
+                formControlName="name"
+                type="text"
+                placeholder="Enter the Name"
+                class="form-control form-control-lg"
+                [ngClass]="{ 'is-invalid': submitted2 && h['name'].errors }"
+              />
+              <div
+                *ngIf="submitted2 && h['name'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="h['name'].errors['required']">Name is reuired</div>
+                <div *ngIf="h['name'].errors['pattern']">Invalid Name.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <i class="bi bi-geo-alt-fill me-2"></i>
+            <label class="form-label">Location</label> <br />
+            <select
+              class="custom-select"
+              formControlName="location"
+              [ngClass]="{ 'is-invalid': submitted2 && h['location'].errors }"
+            >
+              <option value="" disabled>Choose your Location</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Madurai">Madurai</option>
+              <option value="Coimbatore">Coimbatore</option>
+            </select>
+            <div
+              *ngIf="submitted2 && h['location'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="h['location'].errors['required']">
+                Location is reuired
+              </div>
+            </div>
+          </div>
+
+          <br />
+          <br />
+
+          <button
+            (click)="addproject()"
+            class="btn btn-primary btn-lg btn-block"
+            type="submit"
+          >
+            {{ edit === true ? "Update" : "Add" }}
+          </button>
+          <button
+            type="button"
+            (click)="onResetproject()"
+            class="btn btn-danger btn-lg btn-block pull-left"
+          >
+            Reset
+          </button>
+        </form>
+
+        <br />
+
+        <div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Project No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of projectvalue; let i = index">
+                <td>{{ row.projectno }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.location }}</td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    (click)="deleteprojectItem(row)"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    class="btn btn-info mx-3"
+                    (click)="editProject(row, i)"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <!-- Department -->
+  <mat-tab label="Department">
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="card-body p-5">
+        <h2 class="text-uppercase text-center mb-5">Department</h2>
+
+        <form [formGroup]="department">
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <i class="bi bi-123 me-2"></i>
+              <label class="form-label">Department No</label>
+              <input
+                formControlName="department"
+                type="text"
+                placeholder="Enter the Department No"
+                class="form-control form-control-lg"
+                [ngClass]="{
+                  'is-invalid': submitted3 && i['department'].errors
+                }"
+              />
+              <div
+                *ngIf="submitted3 && i['department'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="i['department'].errors['required']">
+                  Department No is reuired
+                </div>
+                <div *ngIf="i['department'].errors['pattern']">
+                  Invalid Department No.
+                </div>
+                <div *ngIf="i['department'].errors['maxLength']">
+                  Dpartment No must not exceed 6 characters
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <i class="bi bi-person-fill me-2"></i>
+              <label class="form-label">Name</label>
+              <input
+                formControlName="name"
+                type="text"
+                placeholder="Enter the Name"
+                class="form-control form-control-lg"
+                [ngClass]="{ 'is-invalid': submitted3 && i['name'].errors }"
+              />
+              <div
+                *ngIf="submitted3 && i['name'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="i['name'].errors['required']">Name is reuired</div>
+                <div *ngIf="i['name'].errors['pattern']">Invalid Name.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <i class="bi bi-123 me-2"></i>
+              <label class="form-label">Code</label>
+              <input
+                formControlName="code"
+                type="text"
+                placeholder="Enter the Code"
+                class="form-control form-control-lg"
+                [ngClass]="{ 'is-invalid': submitted3 && i['code'].errors }"
+              />
+              <div
+                *ngIf="submitted3 && i['code'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="i['code'].errors['required']">Code is reuired</div>
+                <div *ngIf="i['code'].errors['pattern']">Invalid Code.</div>
+                <div *ngIf="i['code'].errors['maxLength']">
+                  Code must not exceed 6 characters
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            (click)="adddepartment()"
+            class="btn btn-primary btn-lg btn-block"
+            type="submit"
+          >
+            {{ edit === true ? "Update" : "Add" }}
+          </button>
+
+          <button
+            type="button"
+            (click)="onResetdepartment()"
+            class="btn btn-danger btn-lg btn-block pull-left"
+          >
+            Reset
+          </button>
+        </form>
+
+        <br />
+
+        <div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Department No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Code</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of departmentvalue; let i = index">
+                <th>{{ row.department }}</th>
+                <td>{{ row.name }}</td>
+                <td>{{ row.code }}</td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    (click)="deletedepartmentItem(row)"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    class="btn btn-info mx-3"
+                    (click)="editDepartment(row, i)"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <!-- Employee -->
+  <mat-tab label="Employee">
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="card-body p-5">
+        <h2 class="text-uppercase text-center mb-5">Employee</h2>
+
+        <form [formGroup]="employee">
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <i class="bi bi-123 me-2"></i>
+                <label class="form-label">ID</label>
+                <input
+                  formControlName="id"
+                  type="text"
+                  placeholder="Enter the Name"
+                  class="form-control form-control-lg"
+                  [ngClass]="{ 'is-invalid': submitted4 && j['id'].errors }"
+                />
+                <div
+                  *ngIf="submitted4 && j['id'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="j['id'].errors['required']">Name is reuired</div>
+                  <div *ngIf="j['id'].errors['pattern']">Invalid Name.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6  mb-4">
+              <div class="form-outline">
+                <i class="bi bi-person-fill me-2"></i>
+                <label class="form-label">Name</label>
+                <input
+                  formControlName="name"
+                  type="text"
+                  placeholder="Enter the Name"
+                  class="form-control form-control-lg"
+                  [ngClass]="{ 'is-invalid': submitted4 && j['name'].errors }"
+                />
+                <div
+                  *ngIf="submitted4 && j['name'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="j['name'].errors['required']">
+                    Name is reuired
+                  </div>
+                  <div *ngIf="j['name'].errors['pattern']">Invalid Name.</div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="col-md-6 mb-4">
+              <i class="bi bi-person-fill me-2"></i>
+              <label class="form-label">Gender</label>
+              <div class="form-check" *ngFor="let gen of gender">
+                <input
+                  class="form-check-input"
+                  formControlName="gender"
+                  id="{{ gen.id }}"
+                  type="radio"
+                  value="{{ gen.value }}"
+                  (change)="radioChangeHandler($event)"
+                  [ngClass]="{ 'is-invalid': submitted4 && j['gender'].errors }"
+                  name="gender"
+                />
+                <div
+                  *ngIf="submitted4 && j['gender'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="j['gender'].errors['required']">
+                    Gender is reuired
+                  </div>
+                </div>
+                <label class="form-check-label">
+                  <div class="displayinline">
+                    {{ gen.value }}
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <i class="bi bi-house-fill me-2"></i>
+                <label class="form-label">Address</label>
+                <textarea
+                  formControlName="address"
+                  type="text"
+                  placeholder="Enter the Address"
+                  class="form-control form-control-lg"
+                  [ngClass]="{
+                    'is-invalid': submitted4 && j['address'].errors
+                  }"
+                ></textarea>
+
+                <div
+                  *ngIf="submitted4 && j['address'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="j['address'].errors['required']">
+                    Address is reuired
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-6 mb-4">
+              <i class="bi bi-calendar-date-fill me-2"></i>
+              <label class="form-label">DOB</label>
+              <div class="input-group">
+                <input
+                  formControlName="dob"
+                  class="form-control"
+                  placeholder="dd/mm/yyyy"
+                  name="d2"
+                  ngbDatepicker
+                  #d2="ngbDatepicker"
+                  [ngClass]="{ 'is-invalid': submitted4 && j['dob'].errors }"
+                />
+                <div
+                  *ngIf="submitted4 && j['dob'].errors"
+                  class="invalid-feedback">
+                  <div *ngIf="j['dob'].errors['required']">DOB is reuired</div>
+                </div>
+                <button
+                  class="btn btn-outline-secondary bi bi-calendar3"
+                  (click)="d2.toggle()"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+
+
+
+            <div class="col-md-6 mb-4">
+              <i class="bi bi-calendar-date-fill me-2"></i>
+              <label class="form-label">Date of Joining</label>
+              <div class="input-group">
+                <input
+                  formControlName="doj"
+                  class="form-control"
+                  placeholder="dd/mm/yyyy"
+                  name="d3"
+                  ngbDatepicker
+                  #d3="ngbDatepicker"
+                  [ngClass]="{ 'is-invalid': submitted4 && j['doj'].errors }"
+                  [(ngModel)]="doj"
+                  (ngModelChange)="calculateDiff()"
+                />
+                <div
+                  *ngIf="submitted4 && j['doj'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="j['doj'].errors['required']">
+                    Date of Joining is reuired
+                  </div>
+                </div>
+                <button
+                  class="btn btn-outline-secondary bi bi-calendar3"
+                  (click)="d3.toggle()"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+
+
+
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <i class="bi bi-house-fill me-2"></i>
+                <label class="form-label">Work Experience</label>
+                <input
+                  formControlName="work"
+                  type="text"
+                  placeholder="Enter the Work Experience"
+                  class="form-control form-control-lg"
+                  [ngClass]="{ 'is-invalid': submitted4 && j['work'].errors }"
+                  [disabled]="isDisabled"
+                  [(ngModel)]="workexp"
+                />
+                <div
+                  *ngIf="submitted4 && j['work'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="j['work'].errors['required']">
+                    Work is reuired
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <div class="mb-3">
+            <i class="bi bi-people-fill me-2"></i>
+            <label class="form-label">Dependent</label> <br />
+            <select
+              [innerHTML]=""
+              class="custom-select"
+              formControlName="dependentt"
+              [ngClass]="{ 'is-invalid': submitted4 && j['dependentt'].errors }"
+            >
+              <option value="" disabled>Choose your Dependent</option>
+              <option
+                *ngFor="let dependent of tabvalue"
+                value="{{ dependent.name }}"
+              >
+                {{ dependent.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted4 && j['dependentt'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="j['dependentt'].errors['required']">
+                Dependent is reuired
+              </div>
+            </div>
+          </div>
+          <br /><br />
+
+          <div class="mb-3">
+            <i class="bi bi-file-earmark-code-fill me-2"></i>
+            <label class="form-label">Project</label> <br />
+            <select
+              class="custom-select"
+              formControlName="projectt"
+              [ngClass]="{ 'is-invalid': submitted4 && j['projectt'].errors }"
+            >
+              <option value="">Choose your Project</option>
+              <option
+                *ngFor="let project of projectvalue"
+                value="{{ project.name }}"
+              >
+                {{ project.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted4 && j['projectt'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="j['projectt'].errors['required']">
+                Project is reuired
+              </div>
+            </div>
+          </div>
+          <br /><br />
+
+          <div class="mb-3">
+            <i class="bi bi-building-fill-check me-2"></i>
+            <label class="form-label">Department</label> <br />
+            <select
+              class="custom-select"
+              formControlName="departmentt"
+              [ngClass]="{
+                'is-invalid': submitted4 && j['departmentt'].errors
+              }"
+            >
+              <option value="">Choose your Department</option>
+              <option
+                *ngFor="let department of departmentvalue"
+                value="{{ department.name }}"
+              >
+                {{ department.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted4 && j['departmentt'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="j['departmentt'].errors['required']">
+                Department is reuired
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+          <button
+            (click)="addemployee()"
+            class="btn btn-primary btn-lg btn-block"
+            type="submit"
+          >
+            {{ edit === true ? "Update" : "Add" }}
+          </button>
+          <button
+            type="button"
+            (click)="onResetemployee()"
+            class="btn btn-danger btn-lg btn-block pull-left"
+          >
+            Reset
+          </button>
+        </form>
+
+        <br />
+
+        <div class="table-responsive-md table-responsive-sm table-responsive-lg">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Address</th>
+                <th scope="col">DOB</th>
+                <th scope="col">DOJ</th>
+                <th scope="col">Work Experience</th>
+                <th scope="col">Dependent</th>
+                <th scope="col">Project</th>
+                <th scope="col">Department</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employee of employeevalue; let i = index">
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.gender }}</td>
+                <td>{{ employee.address }}</td>
+                <td>{{ employee.day | json }}</td>
+                <td>{{ employee.doj | json }}</td>
+                <td>{{ employee.work }}</td>
+                <td>{{ employee.dependentt }}</td>
+                <td>{{ employee.projectt }}</td>
+                <td>{{ employee.departmentt }}</td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    (click)="deleteemployeeItem(employee)"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    class="btn btn-info mx-3"
+                    (click)="editemployee(employee, i)"
+                  >
+                    Update
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

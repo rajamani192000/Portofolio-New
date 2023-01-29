@@ -1,0 +1,325 @@
+<app-homepage></app-homepage>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card-body p-5">
+    <h2 class="text-uppercase text-center mb-5">Random User API</h2>
+    <form [formGroup]="randomuserform">
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="changeRandom()"
+          >Change Random User</button>
+      </div> <br>
+      <div class="d-flex justify-content-center">
+
+        <img [src]="picture" alt="" />
+      </div>
+      <br />
+      <div class="d-flex justify-content-center">
+        <h2>{{ name.title + " " + name.first + " " + name.last }}</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-person-fill me-2"></i>
+            <label class="form-label">Title</label>
+            <input
+              formControlName="title"
+              type="text"
+              placeholder="Enter the title"
+              class="form-control form-control-lg"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-person-fill me-2"></i>
+            <label class="form-label">First Name</label>
+            <input
+              formControlName="first"
+              type="text"
+              placeholder="Enter the FirstName"
+              class="form-control form-control-lg"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-person-fill me-2"></i>
+            <label class="form-label">Last Name</label>
+            <input
+              formControlName="last"
+              type="text"
+              placeholder="Enter the LastName"
+              class="form-control form-control-lg"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 mb-4">
+          <i class="bi bi-person-fill me-2"></i>
+          <label class="form-label">Gender</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="gender"
+              name="gender"
+              value="male"
+              [(ngModel)]="gender"
+            />
+            <label class="form-check-label">
+              <div class="displayinline">Male</div> </label
+            ><br />
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="gender"
+              name="gender"
+              value="female"
+              [(ngModel)]="gender"
+            />
+            <label class="form-check-label">
+              <div class="displayinline">Female</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-house-fill me-2"></i>
+            <label class="form-label">Address</label>
+            <textarea
+              formControlName="street"
+              type="text"
+              placeholder="Enter the Address"
+              class="form-control form-control-lg"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-geo-alt-fill me-2"></i>
+            <label class="form-label">City</label>
+            <input
+              formControlName="city"
+              type="text"
+              placeholder="Enter the LastName"
+              class="form-control form-control-lg"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-geo-alt-fill me-2"></i>
+            <label class="form-label">State</label>
+            <input
+              formControlName="state"
+              type="text"
+              placeholder="Enter the State"
+              class="form-control form-control-lg"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-geo-alt-fill me-2"></i>
+            <label class="form-label">Country</label>
+            <input
+              formControlName="country"
+              type="text"
+              placeholder="Enter the State"
+              class="form-control form-control-lg"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-people-fill me-2"></i>
+            <label class="form-label">Postcode</label>
+            <input
+              type="text"
+              placeholder="Enter the Relationship"
+              class="form-control form-control-lg"
+              formControlName="postcode"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-people-fill me-2"></i>
+            <label class="form-label">Email</label>
+            <input
+              type="text"
+              placeholder="Enter the Email"
+              class="form-control form-control-lg"
+              formControlName="email"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <i class="bi bi-calendar-date-fill me-2"></i>
+          <label class="form-label">DOB</label>
+          <div class="input-group">
+
+          <input formControlName="dob" class="form-control" placeholder="Date Time:"
+          name="d3"
+          [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+
+          >
+          <owl-date-time  class="btn btn-outline-secondary bi bi-calendar3" #dt2 ></owl-date-time>
+        </div>
+      </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-people-fill me-2"></i>
+            <label class="form-label">Age</label>
+            <input
+              type="text"
+              placeholder="Enter the Email"
+              class="form-control form-control-lg"
+              formControlName="age"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <i class="bi bi-calendar-date-fill me-2"></i>
+          <label class="form-label">Registered Date</label>
+          <div class="input-group">
+
+          <input formControlName="registereddate" class="form-control" placeholder="Date Time:"
+
+          [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4"
+          (ngModelChange)="onChange($event)"
+          >
+          <owl-date-time  class="btn btn-outline-secondary bi bi-calendar3" #dt4 ></owl-date-time>
+        </div>
+      </div>
+
+
+        <div class="col-md-4 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-people-fill me-2"></i>
+            <label class="form-label">Registered Age</label>
+            <input
+              type="text"
+              placeholder="Enter the Email"
+              class="form-control form-control-lg"
+              formControlName="registeredage"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-people-fill me-2"></i>
+            <label class="form-label">Phone</label>
+            <input
+              type="text"
+              placeholder="Enter the Email"
+              class="form-control form-control-lg"
+              formControlName="phone"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-people-fill me-2"></i>
+            <label class="form-label">Cell</label>
+            <input
+              type="text"
+              placeholder="Enter the Email"
+              class="form-control form-control-lg"
+              formControlName="cell"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+          <div class="form-outline">
+            <i class="bi bi-geo-alt-fill me-2"></i>
+            <label class="form-label">Direction</label>
+            <input
+              type="text"
+              placeholder="Enter the Relationship"
+              class="form-control form-control-lg"
+              formControlName="direction"
+            />
+          </div>
+        </div>
+        <br /><br />
+
+      </div>
+
+      <!-- <button
+          class="btn btn-primary btn-lg btn-block"
+          type="submit"
+          (click)="adddependent()"
+        >
+          {{ edit === true ? "Update" : "Add" }}
+        </button>
+
+        <button
+          type="button"
+          (click)="onResetdependent()"
+          class="btn btn-danger btn-lg btn-block pull-left"
+        >
+          Reset
+        </button> -->
+      <br />
+    </form>
+
+    <br />
+
+    <!-- <div>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Relationship</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr >
+              <td>i</td>
+              <td>name</td>
+              <td>gender</td>
+              <td>relationship</td>
+              <td>
+                <button class="btn btn-danger">
+                  Delete
+                </button>
+                <button
+                  class="btn btn-info mx-3"
+                >
+                  Edit
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+  </div>
+</div>
