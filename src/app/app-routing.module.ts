@@ -1,3 +1,4 @@
+import { RajamaniComponent } from './rajamani/rajamani.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -10,9 +11,10 @@ import { CakesComponent } from './cakes/cakes.component';
 import { ProjectmanagementComponent } from './projectmanagement/projectmanagement.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {path:'',component:HomepageComponent},
+  {path:'',component:RajamaniComponent},
   {path:'cake',component:CakesComponent},
   {path:'project',component:ProjectmanagementComponent},
   {path:'currencies',component:CurrenciesComponent},

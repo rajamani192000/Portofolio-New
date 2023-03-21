@@ -64,6 +64,8 @@ export class EmployeeComponent implements OnInit {
     return this.employeeform.controls;
   }
 
+
+
   addEmployee() {
     this.submitted = true;
     if(!this.edit){

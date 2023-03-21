@@ -19,6 +19,26 @@
       "password": "kiran",
       "confirmPassword": "kiran",
       "id": 3
+    },
+    {
+      "firstname": "Rajamani",
+      "lastname": "A",
+      "username": "Rajamani",
+      "email": "rajamani@gmail.com",
+      "telnumber": "7904998687",
+      "password": "rajamani19",
+      "confirmPassword": "rajamani19",
+      "id": 4
+    },
+    {
+      "firstname": "Madhavan",
+      "lastname": "V",
+      "username": "madhavan",
+      "email": "madhavan@gmail.com",
+      "telnumber": "7904998587",
+      "password": "madhavan",
+      "confirmPassword": "madhavan",
+      "id": 5
     }
   ],
   "comments": [

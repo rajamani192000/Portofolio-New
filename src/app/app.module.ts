@@ -26,8 +26,10 @@ import { AntonyComponent } from './services/a/antony/antony.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { RajamaniComponent } from './rajamani/rajamani.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
-  declarations: [			
+  declarations: [
     AppComponent,
     ProjectmanagementComponent,
     CakesComponent,
@@ -39,7 +41,9 @@ import { LoginComponent } from './login/login.component';
     AntonyComponent,
       EmployeeComponent,
       RegistrationComponent,
-      LoginComponent
+      LoginComponent,
+      RajamaniComponent
+
    ],
   imports: [
     BrowserModule,
@@ -57,6 +61,7 @@ import { LoginComponent } from './login/login.component';
     NgxMatDatetimePickerModule,
     MatFormFieldModule,
     OwlDateTimeModule,
+    NgImageSliderModule,
      OwlNativeDateTimeModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDwFV5OV-cBJooKYPGR4oABMg6EeLuJ0YA'
